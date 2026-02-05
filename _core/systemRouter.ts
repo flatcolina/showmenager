@@ -21,7 +21,11 @@ export const systemRouter = router({
       })
     )
     .mutation(async ({ input }) => {
-      const delivered = await notifyOwner(input);
+      // Ensure required properties are present for strict TS settings.
+      const delivered = await notifyOwner({
+        title: input.title,
+        content: input.content,
+      });
       return {
         success: delivered,
       } as const;

@@ -49,12 +49,12 @@ function isTimestamp(v: unknown): v is Timestamp {
 /**
  * Convert Firestore Timestamps to JS Date recursively (keeps other values unchanged).
  */
-export function convertTimestampsToDates<T>(value: T): T {
-  if (isTimestamp(value)) return value.toDate() as any;
-  if (Array.isArray(value)) return value.map(v => convertTimestampsToDates(v)) as any;
+export function convertTimestampsToDates(value: any): any {
+  if (isTimestamp(value)) return value.toDate();
+  if (Array.isArray(value)) return value.map(v => convertTimestampsToDates(v));
   if (value && typeof value === "object") {
     const out: any = {};
-    for (const [k, v] of Object.entries(value as any)) {
+    for (const [k, v] of Object.entries(value)) {
       out[k] = convertTimestampsToDates(v);
     }
     return out;

@@ -517,13 +517,17 @@ export async function markAllNotificationsAsRead(userId: number) {
 
 // ============== REPORTS ==============
 
-type ReportFilters = { artistId?: number; startDate: Date; endDate: Date };
+// Some router inputs send date filters as optional. Keep them optional here and
+// apply sensible defaults to preserve backwards compatibility.
+type ReportFilters = { artistId?: number; startDate?: Date; endDate?: Date };
 
 async function getEventsInRange(filters: ReportFilters): Promise<Event[]> {
+  const startDate = filters.startDate ?? new Date(0);
+  const endDate = filters.endDate ?? new Date("2999-12-31T23:59:59.999Z");
   return getEvents({
     artistId: filters.artistId,
-    startDate: filters.startDate,
-    endDate: filters.endDate,
+    startDate,
+    endDate,
   });
 }
 
