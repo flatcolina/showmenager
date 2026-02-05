@@ -1,0 +1,4 @@
+{
+  "type": "service_account",
+  "...": "paste your real service account json as config/firebase-key.json"
+}

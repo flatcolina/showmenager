@@ -15,7 +15,7 @@ import {
   type UserArtistPermission,
   type InsertNotification,
   type Notification,
-} from "../drizzle/schema";
+} from "./schema";
 
 import {
   FieldValue,
